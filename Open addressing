@@ -1,0 +1,61 @@
+import java.util.Scanner;
+import java.io.File;
+import java.io.FileNotFoundException;
+
+public class OpenAddressing
+{
+    private String[] table;
+    private int size;
+    private int collisions;
+    private int elements;
+
+    public OpenAddressing(int size)
+    {
+        this.size = size;
+        this.table = new String[size];
+        this.collisions = 0;
+        this.elements = 0;
+    }
+
+    private int hash(String key)
+    {
+        int h = 0;
+        for(int i = 0; i < key.length(); i++)
+        {
+            h += key.charAt(i);
+        }
+        return h % size;
+    }
+
+    public void insert(String key)
+    {
+        int index = hash(key);
+
+        while (table[index] != null) {
+            System.out.println("Collision at index " + index + " for key " + key);
+            collisions++;
+            index = (index + 1) % size;
+        }
+
+        table[index] = key;
+    }
+
+    private void rehash()
+    {
+        String old[] = table;
+        size *= 2;
+        table = new String[size];
+        elements = 0;
+        collisions = 0;
+        for (String s : oldTable) {
+            if (s != null) insert(s);
+        }
+    }
+
+    public void display() {
+        for (int i = 0; i < size; i++) {
+            System.out.println(i + ": " + table[i]);
+        }
+        System.out.println("Total Collisions: " + collisions);
+    }
+}
