@@ -1,0 +1,38 @@
+import java.util.LinkedList;
+
+public class Chaining
+{
+    private LinkedList<String>[] table = new LinkedList[50];
+    private int size = 50;
+    private int collisions;
+
+    private int hash(String key)
+    {
+        int sum = 0;
+        for(char c : key.toCharArray())
+            sum += c;
+        return sum % size;
+    }
+
+    private void insert(String key) {
+        int index = hash(key);
+
+        if (!table[index].isEmpty()) {
+            System.out.println("Collision at index " + index + " for key " + key);
+            collisions++;
+        }
+
+        table[index].add(key);
+    }
+
+    public void display() {
+        for (int i = 0; i < size; i++) {
+            System.out.print(i + ": ");
+            for (String key : table[i]) {
+                System.out.print(key + " -> ");
+            }
+            System.out.println("null");
+        }
+        System.out.println("Total Collisions: " + collisions);
+    }
+}
