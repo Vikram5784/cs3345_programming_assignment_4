@@ -9,6 +9,10 @@ public class OpenAddressing
     private int collisions;
     private int elements;
 
+    public static void main(String[] args) throws Exception {
+        menu();
+    }
+
     public OpenAddressing(int size)
     {
         this.size = size;
