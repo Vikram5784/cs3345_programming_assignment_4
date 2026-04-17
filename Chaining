@@ -35,4 +35,20 @@ public class Chaining
         }
         System.out.println("Total Collisions: " + collisions);
     }
+
+    public void menu() {
+        Scanner input = new Scanner(System.in);
+
+        while (true) {
+            System.out.println("\n1.Display\n2.Rehash\n3.Quit");
+            int choice = input.nextInt();
+
+            if (choice == 1)
+                display();
+            else if (choice == 2)
+                rehash();
+            else
+                break;
+        }
+    }
 }
