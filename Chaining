@@ -51,4 +51,18 @@ public class Chaining
                 break;
         }
     }
+
+    public void loadFile() throws Exception {
+        Scanner file = new Scanner(new File("patient.txt"));
+
+        while (file.hasNextLine()) {
+            String line = file.nextLine();
+            String[] parts = line.split(",");
+            String lastName = parts[1].trim();
+            insert(lastName);
+        }
+
+        file.close();
+        System.out.println("Total Collisions: " + collisions);
+    }
 }
